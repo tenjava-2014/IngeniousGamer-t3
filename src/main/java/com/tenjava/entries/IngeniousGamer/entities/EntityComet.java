@@ -97,13 +97,13 @@ public class EntityComet extends EntityFallingBlock{
 				if(this.motX == 0.0D && this.motZ != 0.0D){
 					this.motX = lastmotX*-1;
 					this.velocityChanged=true;
-					world.getWorld().playSound(new Location(world.getWorld(),locX,locY,locZ), Sound.DIG_WOOD, 2, 1);
+					//world.getWorld().playSound(new Location(world.getWorld(),locX,locY,locZ), Sound.DIG_WOOD, 2, 1);
 					
 				}
 				if(this.motZ == 0.0D && this.motX != 0.0D){
 					this.motZ = lastmotZ*-1;
 					this.velocityChanged=true;
-					world.getWorld().playSound(new Location(world.getWorld(),locX,locY,locZ), Sound.DIG_WOOD, 2, 1);
+					//world.getWorld().playSound(new Location(world.getWorld(),locX,locY,locZ), Sound.DIG_WOOD, 2, 1);
 				}
 				if(this.motY == 0.0D){
 					this.motY = lastmotY*-1;

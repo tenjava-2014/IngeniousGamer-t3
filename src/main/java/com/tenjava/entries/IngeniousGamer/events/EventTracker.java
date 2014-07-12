@@ -31,7 +31,7 @@ public class EventTracker implements Listener {
 		}
 		else if(e.getBlock().getType().equals(Material.SAND)){
 			int percentChance = rand.nextInt((20 - (0)) + 1) + (0);
-			if(percentChance>0){//18
+			if(percentChance>19){//18
 				try{
 					Particles.sendParticle(Particles.FIREWORKS_SPARK, e.getBlock().getLocation().add(0.5,0.5,0.5),(float) .2,(float) .2,(float) .2,(float) 0.1, 25);
 				}catch(Exception ex){ex.printStackTrace();}

@@ -9,7 +9,9 @@ import java.util.Random;
 
 
 
+
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.craftbukkit.v1_7_R3.CraftWorld;
@@ -42,35 +44,59 @@ public class Initialize {
 		randomTask = Bukkit.getScheduler().runTaskTimer(TenJava.plugin, new Runnable(){
 			Random rand = new Random();
 			boolean check=true;
-			Player player = Bukkit.getOnlinePlayers()[rand.nextInt((Bukkit.getOnlinePlayers().length - (0)) + 1) + (0)];
+			public void run(){
+				int chance = rand.nextInt((100 - (0)) + 1) + (0);
+				if(chance >=96){
+					spawnComets();
+				}				
+
+			}
+		}, 0, 200);
+	}
+	public static BukkitTask cometTask;
+	public static void spawnComets(){
+		Bukkit.broadcastMessage(ChatColor.BLUE+"["+ChatColor.WHITE+"Weather.com"+ChatColor.BLUE+"] "+ChatColor.RED+"Looks like an meteor shower is coming!");
+		cometTask = Bukkit.getScheduler().runTaskTimer(TenJava.plugin, new Runnable(){
+			Random rand = new Random();
+			boolean check=true;
+			int loops = 15;
+			int count = 1;
 			public void run(){
 				if(check){
-					//cometMap.put(fr, tid); Add cometMap for tracking tasks when implemented
+					loops = rand.nextInt((15 - (0)) + 1) + (15);
 					check=false;
 				}
+				Player player = Bukkit.getOnlinePlayers()[rand.nextInt((Bukkit.getOnlinePlayers().length - (0))) + (0)];
 				Location cometSpawn = player.getLocation();
 				CraftWorld handle = (CraftWorld) cometSpawn.getWorld();
+				int randomZ = rand.nextInt((60 - (-60)) + 1) + (-60);
+				int randomX = rand.nextInt((60 - (-60)) + 1) + (-60);
+				int randomVelX = rand.nextInt((1 - (-1)) + 1) + (-1);
+				int randomVelZ = rand.nextInt((1 - (-1)) + 1) + (-1);
+				
+				for(int i=0;i<7;i++){
+					int scatterX = rand.nextInt((5 - (-5)) + 1) + (-5);
+					int scatterZ = rand.nextInt((5 - (-5)) + 1) + (-5);
 				EntityComet fr= new EntityComet(handle.getHandle(),
-						cometSpawn.getX(),
-						cometSpawn.getY()+60,
-						cometSpawn.getZ(),
+						(cometSpawn.getX()+randomX)+scatterX,
+						(cometSpawn.getY()+60),
+						(cometSpawn.getZ()+randomZ)+scatterZ,
 						173,0);
 				handle.getHandle().addEntity(fr, SpawnReason.CUSTOM);
 				fr.ticksLived=1;
-				int randomZ = rand.nextInt((60 - (-60)) + 1) + (-60);
-				int randomY = rand.nextInt((0 - (0)) + 1) + (0);
-				int randomX = rand.nextInt((60 - (-60)) + 1) + (-60);
-				int dir;
-				if(randomX==1){dir = 1;}
-				else{dir = -1;}
-				//fr.setPosition(cometSpawn.getX()+(-60*dir), cometSpawn.getY()+10, cometSpawn.getZ()+randomZ);
-				//fr.motX=3.4*dir;
+				fr.motX=randomVelX;
 				//fr.motY=1.2;
-				//fr.motZ=-(randomZ/5.8)*dir;
+				fr.motZ=-(randomVelZ);
 			    fr.positionChanged=true;
 			    fr.velocityChanged=true;
+				}
+				count++;
+				if(count>=loops){
+					cometTask.cancel();
+				}
 			}
-		}, 0, 200);
+		}, 0, 60);
+		
 	}
 	public static void patch() {
 		   try {
