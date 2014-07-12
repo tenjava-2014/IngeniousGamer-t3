@@ -63,7 +63,7 @@ public class Initialize {
 			int count = 1;
 			public void run(){
 				if(check){
-					loops = rand.nextInt((15 - (0)) + 1) + (15);
+					loops = rand.nextInt((15 - (0)) + 1) + (0);
 					check=false;
 				}
 				Player player = Bukkit.getOnlinePlayers()[rand.nextInt((Bukkit.getOnlinePlayers().length - (0))) + (0)];

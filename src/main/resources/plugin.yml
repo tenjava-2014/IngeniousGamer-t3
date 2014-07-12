@@ -1,3 +1,9 @@
 name: IngeniousGamer-t3
 main: com.tenjava.entries.IngeniousGamer.t3.TenJava
 version: '${project.version}'
+authors: [IngeniousGamer]
+commands:
+  worldevent:
+    description: WorldEvents
+    usage: /worldevent [command] [args]
+    aliases: wev
