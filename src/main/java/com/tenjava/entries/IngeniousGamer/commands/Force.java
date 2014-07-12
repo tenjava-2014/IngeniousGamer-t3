@@ -18,6 +18,9 @@ public class Force implements SubCommand {
 		else if(args[0].equalsIgnoreCase("quicksand")){
 			EventTracker.spawnQuickSand(player);
 		}
+		else{
+			player.sendMessage(ChatColor.RED+"That is not an event! Try 'meteor' or 'quicksand'");
+		}
 		return true;
 	}
 
