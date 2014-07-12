@@ -1,10 +1,22 @@
 package com.tenjava.entries.IngeniousGamer.t3;
 
+
+import org.bukkit.Bukkit;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.tenjava.entries.IngeniousGamer.events.LumberTracker;
+
 public class TenJava extends JavaPlugin {
+	public static Plugin plugin;
+
 	public void onEnable(){
-		//Github test, client issues occuring..
+		PluginManager pm = Bukkit.getPluginManager();
+		pm.registerEvents(new LumberTracker(), this);
+		plugin =  this;
+		Initialize.initEverything();
+
 	}
 	public void onDisable(){
 		
