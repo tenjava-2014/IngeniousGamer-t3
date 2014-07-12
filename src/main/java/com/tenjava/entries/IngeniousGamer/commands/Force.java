@@ -5,11 +5,19 @@ import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.Player;
 
+import com.tenjava.entries.IngeniousGamer.events.EventTracker;
+import com.tenjava.entries.IngeniousGamer.t3.Initialize;
+
 
 public class Force implements SubCommand {
 	@Override
 	public boolean onCommand(Player player, String[] args) {
-		//TODO FORCE EVENTS
+		if(args[0].equalsIgnoreCase("meteor")){
+			Initialize.spawnComets();
+		}
+		else if(args[0].equalsIgnoreCase("quicksand")){
+			EventTracker.spawnQuickSand(player);
+		}
 		return true;
 	}
 

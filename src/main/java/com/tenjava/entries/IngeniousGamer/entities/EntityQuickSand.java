@@ -19,13 +19,13 @@ import net.minecraft.server.v1_7_R3.PacketPlayOutWorldParticles;
 import net.minecraft.server.v1_7_R3.World;
 import com.tenjava.entries.IngeniousGamer.util.Particles;
 
-public class EntityComet extends EntityFallingBlock{	  
+public class EntityQuickSand extends EntityFallingBlock{	  
 	private boolean f;
 	private double lastmotX;
 	private double lastmotY;
 	private double lastmotZ;
-	public static ArrayList<EntityComet> allcomets = new ArrayList<EntityComet>();
-	public EntityComet(World world, double d0, double d1, double d2,int bid,int bda) {
+	public static ArrayList<EntityQuickSand> allcomets = new ArrayList<EntityQuickSand>();
+	public EntityQuickSand(World world, double d0, double d1, double d2,int bid,int bda) {
 	      super(world);
 	      this.dropItem = true;
 	      /* try{
@@ -38,6 +38,7 @@ public class EntityComet extends EntityFallingBlock{
 		    	e.printStackTrace();
 		    }*/
 		    id = Block.a((CraftItemStack.asNMSCopy(new ItemStack(bid)).getItem()));
+		    
 		    data = bda;
 		    k = true;
 		    a(0.98F, 0.98F);
@@ -54,7 +55,6 @@ public class EntityComet extends EntityFallingBlock{
 		    lastZ = d2;
 		    allcomets.add(this);
 	   }
-
 	@Override
 	public void h() {
 		if (this.id.getMaterial() == Material.AIR) {
@@ -69,15 +69,9 @@ public class EntityComet extends EntityFallingBlock{
 			
 			//Bukkit.broadcastMessage("loc");
 			++this.ticksLived;
-			this.motY -= 0.03999999910593033D;
 			//this.motY -= 0.00999910593033D;
 			//if(!checkCollision(this)){//move back into moving loop
 				this.setPosition(locX, locY, locZ);
-
-			this.move(this.motX, this.motY, this.motZ);
-			this.motX *= 0.9800000190734863D;
-			this.motY *= 0.9800000190734863D;
-			this.motZ *= 0.9800000190734863D;
 			//}
 			if (!this.world.isStatic) {
 				int i = MathHelper.floor(this.locX);
@@ -93,40 +87,10 @@ public class EntityComet extends EntityFallingBlock{
 
 					this.world.setAir(i, j, k);
 				}
-				
-				if(this.motX == 0.0D && this.motZ != 0.0D){
-					this.motX = lastmotX*-1;
-					this.velocityChanged=true;
-					//world.getWorld().playSound(new Location(world.getWorld(),locX,locY,locZ), Sound.DIG_WOOD, 2, 1);
-					
-				}
-				if(this.motZ == 0.0D && this.motX != 0.0D){
-					this.motZ = lastmotZ*-1;
-					this.velocityChanged=true;
-					//world.getWorld().playSound(new Location(world.getWorld(),locX,locY,locZ), Sound.DIG_WOOD, 2, 1);
-				}
-				if(this.motY == 0.0D){
-					this.motY = lastmotY*-1;
-					this.velocityChanged=true;
-					world.getWorld().playSound(new Location(world.getWorld(),locX,locY,locZ), Sound.EXPLODE, 2, 1);
-					world.getWorld().createExplosion(new Location(world.getWorld(),locX,locY,locZ),3);
-					
-					allcomets.remove(this);
-					die();
-				}
-				if(Math.abs(motX) >= 0.01D || Math.abs(motZ) >= 0.01D || Math.abs(motY) >= 0.01D){
-		        	try {
-						Particles.sendParticle(Particles.FIREWORKS_SPARK, new Location(this.world.getWorld(),this.locX,this.locY,this.locZ), 0.2f, 0f, 0.2f, 0f, 5);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-		        	
-				}
-				else if(motX!=0.0D && motZ!=0.0D){
 					this.motX = 0.0D;
 					this.motZ = 0.0D;
 					this.velocityChanged=true;
-				}
+					this.positionChanged=true;
 				
 				
 				

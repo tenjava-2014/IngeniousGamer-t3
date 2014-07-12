@@ -10,6 +10,7 @@ import java.util.Random;
 
 
 
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -21,6 +22,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitTask;
 
 import com.tenjava.entries.IngeniousGamer.entities.EntityComet;
+import com.tenjava.entries.IngeniousGamer.entities.EntityQuickSand;
 import com.tenjava.entries.IngeniousGamer.util.RandomCollection;
 
 public class Initialize {
@@ -103,6 +105,7 @@ public class Initialize {
 		      Method a = net.minecraft.server.v1_7_R3.EntityTypes.class.getDeclaredMethod("a", Class.class, String.class, int.class);
 		      a.setAccessible(true);
 		      a.invoke(a, EntityComet.class, "Comet", 504);
+		      a.invoke(a, EntityQuickSand.class, "QuickSand", 505);
 		   } catch (Exception ignored) {
 			  //Already Registered.
 		   }
