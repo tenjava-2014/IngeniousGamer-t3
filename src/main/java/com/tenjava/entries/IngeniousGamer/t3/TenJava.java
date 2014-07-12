@@ -4,7 +4,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class TenJava extends JavaPlugin {
 	public void onEnable(){
-		//Start of Ten.Java
+		//Github test, client issues occuring..
 	}
 	public void onDisable(){
 		
