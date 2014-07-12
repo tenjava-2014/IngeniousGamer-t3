@@ -8,7 +8,9 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
  
 public enum Particles {
-    FIREWORKS_SPARK("fireworksSpark");
+    FIREWORKS_SPARK("fireworksSpark"),
+    REDDUST("reddust");
+    
     private String name;
  
     Particles(String name) {
